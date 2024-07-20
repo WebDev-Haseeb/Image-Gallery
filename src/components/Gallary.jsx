@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "./Image";
 
 const gallary = [
@@ -15,16 +15,37 @@ const gallary = [
     { url: "./images/img11.jpg", tags: "image" },
     { url: "./images/img12.jpg", tags: "image" },
     { url: "./images/img13.jpg", tags: "image" },
-    { url: "./images/img14.jpg", tags: "image" }
+    { url: "./images/img14.jpg", tags: "image" }, 
+    { url: "./images/img15.jpg", tags: "image" },
+    { url: "./images/img16.jpg", tags: "image" },
+    { url: "./images/img17.jpg", tags: "image" },
+    { url: "./images/img18.jpg", tags: "image" }
 ];
 
 export default function Gallary() {
     const [images, setImages] = useState(gallary);
+    const [columns, setColumns] = useState([[], [], []]);
+
+    const distributeImages = (images) => {
+        const columns = [[], [], []];
+        images.forEach((image, index) => {
+            columns[index % 3].push(image);
+        });
+        return columns;
+    };
+
+    useEffect(() => {
+        setColumns(distributeImages(images));
+    }, [images]);
 
     return (
         <div className="gallary">
-            {images.map((image, index) => (
-                <Image key={index} url={image.url} tags={image.tags}/>
+            {columns.map((column, colIndex) => (
+                <div key={colIndex} className="column">
+                    {column.map((image, index) => (
+                        <Image key={index} url={image.url} tags={image.tags}/>
+                    ))}
+                </div>
             ))}
         </div>
     );
