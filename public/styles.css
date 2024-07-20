@@ -23,8 +23,7 @@ body {
 .header {
     margin-right: 3px;
     height: 30vh;
-    background-color: #333;
-    color: #fff;
+    color: #333;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -36,7 +35,7 @@ body {
 .header h1 {
     font-size: 2rem;
     letter-spacing: 0.5px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .header p {
@@ -50,22 +49,30 @@ body {
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
-    width: 35vw;
+    width: 45vw;
     padding: 5px 20px;
-    background-color: #fff;
-    border-radius: 25px;
+    background-color: #333;
+    border-radius: 8px;
 }
 
 .searchContainer input {
+    color: #fff;
     border: none;
     outline: none;
+    background-color: transparent;
     padding: 10px;
+    width: 100%;
     border-radius: 25px;
+}
+
+.searchContainer input::placeholder {
+    letter-spacing: 0.5px;
+    color: #e6e6e6;
 }
 
 .searchContainer .icon {
     font-size: 1.2rem;
-    color: #333;
+    color: #fff;
 }
 
 .gallary {
@@ -78,7 +85,7 @@ body {
 .column {
     display: flex;
     flex-direction: column;
-    flex: 1;
+    flex: 33.33%;
     gap: 15px;
 }
 
@@ -97,3 +104,50 @@ body {
     transition: all 0.1s ease-in-out;
 }
 
+.add {
+    position: fixed;
+    right: 1vw;
+    bottom: 5vh;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2vh auto;
+    padding: 12px 12px;
+    font-size: 1.1rem;
+    color: #fff;
+    background-color: #333;
+    border: none;
+    border-radius: 7px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    width: 4vw;
+    transition: width 0.3s ease-out;
+}
+
+.add-icon {
+    font-size: 1.5rem;
+    transition: opacity 0.3s ease-out;
+}
+
+.add .button-text {
+    display: none;
+    margin-left: 10px;
+    transition: opacity 0.1s ease-in-out;
+}
+
+.add:hover {
+    background-color: #555;
+    width: 11vw;
+}
+
+.add:hover .add-icon {
+    opacity: 0;
+    display: none;
+}
+
+.add:hover .button-text {
+    text-wrap: nowrap;
+    display: inline;
+    opacity: 1;
+}
