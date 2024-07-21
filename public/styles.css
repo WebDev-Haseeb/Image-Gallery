@@ -79,7 +79,7 @@ body {
     color: #fff;
 }
 
-.gallary {
+.gallery {
     display: flex;
     justify-content: space-between;
     gap: 15px;
@@ -91,6 +91,24 @@ body {
     flex-direction: column;
     flex: 33.33%;
     gap: 15px;
+}
+
+.image-container {
+    position: relative;
+}
+
+.delete-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    color: #fff;
+    cursor: pointer;
+    display: none;
+}
+
+.image-container:hover .delete-icon {
+    display: block;
 }
 
 .image {
