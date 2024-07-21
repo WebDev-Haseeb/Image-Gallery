@@ -40,10 +40,57 @@ export default function Gallary() {
         setColumns(distributeImages(images));
     }, [images]);
 
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (file.type !== 'image/png' && file.type !== 'image/jpeg' && file.type !== 'image/svg+xml') {
+            showAlert('badAlert');
+            return;
+        }
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const newImage = { url: reader.result, tags: "new image" };
+                setImages([...images, newImage]);
+                //scroll the page down to the footer.
+                const element = document.getElementById("footer");
+                element.scrollIntoView({ behavior: "smooth" });
+                showAlert('goodAlert');
+            };
+            reader.readAsDataURL(file);
+        } else {
+            showAlert('badAlert');
+        }
+    };
+
+    function showAlert(className) {
+        document.getElementsByClassName(className)[0].classList.add('showAlert');
+
+        setTimeout(() => {
+            document.getElementsByClassName(className)[0].classList.remove('showAlert');
+        }, 3000);
+    }
+
     return (
         <>
-            <button className="add">
-                <FaPlus className="add-icon"/>
+            <div className="goodAlert">
+                <span>Image added Successfully!</span>
+            </div>
+
+            <div className="badAlert">
+                <span>An Error occured!</span>
+            </div>
+
+            <input
+                type="file"
+                id="fileInput"
+                accept=".png, .jpg, .jpeg, .svg"
+                style={{ display: 'none' }}
+                onChange={handleFileChange}
+            />
+
+            <button className="add" onClick={() => document.getElementById('fileInput').click()}>
+                <FaPlus className="add-icon" />
                 <span className="button-text">Add Image</span>
             </button>
 
