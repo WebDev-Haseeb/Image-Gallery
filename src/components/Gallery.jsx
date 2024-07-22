@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaTimes } from "react-icons/fa";
 import Image from "./Image";
 
 const gallery = [
@@ -26,6 +26,13 @@ const gallery = [
 export default function Gallery() {
     const [images, setImages] = useState(gallery);
     const [columns, setColumns] = useState([[], [], []]);
+    const [showImage, setShowImage] = useState(false);
+
+    function handleCloseClick() {
+        setShowImage(false);
+        document.getElementById("display").style.display = "none";
+    }
+
 
     const distributeImages = (images) => {
         const columns = [[], [], []];
@@ -104,6 +111,10 @@ export default function Gallery() {
                         ))}
                     </div>
                 ))}
+            </div>
+
+            <div id="display">
+                <FaTimes className="close" onClick={handleCloseClick}/>
             </div>
         </>
     );
