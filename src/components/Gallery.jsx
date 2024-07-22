@@ -33,17 +33,27 @@ export default function Gallery() {
         document.getElementById("display").style.display = "none";
     }
 
+    function getColumnCount() {
+        const width = window.innerWidth;
+        if (width > 850) return 3;
+        if (width > 600) return 2;
+        return 1;
+    }
 
-    const distributeImages = (images) => {
-        const columns = [[], [], []];
+    function distributeImages(images) {
+        const columnCount = getColumnCount();
+        const columns = Array.from({ length: columnCount }, () => []);
         images.forEach((image, index) => {
-            columns[index % 3].push(image);
+            columns[index % columnCount].push(image);
         });
         return columns;
-    };
+    }
 
     useEffect(() => {
-        setColumns(distributeImages(images));
+        const updateColumns = () => setColumns(distributeImages(images));
+        updateColumns();
+        window.addEventListener("resize", updateColumns);
+        return () => window.removeEventListener("resize", updateColumns);
     }, [images]);
 
     const handleFileChange = (event) => {
