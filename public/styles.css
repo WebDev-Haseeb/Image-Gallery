@@ -305,15 +305,7 @@ body {
 /* Responsiveness for 600px and below. */
 @media screen and (max-width:600px) {
     .header {
-        margin-right: 3px;
-        height: 30vh;
-        color: #333;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap:10px;
-        padding: 10px;
+        height: 25vh;
     }
     
     .header h1 {
