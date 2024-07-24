@@ -242,6 +242,22 @@ body {
     display: none;
 }
 
+.deletion {
+    position: fixed;
+    top: 3vh;
+    right: 1vw;
+    z-index: 1;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #c5310c;
+    border-radius: 7px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    animation-name: alertAnimation;
+    animation-duration: 3s;
+    display: none;
+}
+
 @keyframes alertAnimation {
     0%   {opacity: 50%;}
     25%   {opacity: 100%;}

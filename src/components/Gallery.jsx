@@ -3,27 +3,27 @@ import { FaPlus, FaTimes } from "react-icons/fa";
 import Image from "./Image";
 
 const gallery = [
-    { url: "./images/img1.jpg", tags: "image" },
-    { url: "./images/img2.jpg", tags: "image" },
-    { url: "./images/img3.jpg", tags: "image" },
-    { url: "./images/img4.jpg", tags: "image" },
-    { url: "./images/img5.jpg", tags: "image" },
-    { url: "./images/img6.jpg", tags: "image" },
-    { url: "./images/img7.jpg", tags: "image" },
-    { url: "./images/img8.jpg", tags: "image" },
-    { url: "./images/img9.jpg", tags: "image" },
-    { url: "./images/img10.jpg", tags: "image" },
-    { url: "./images/img11.jpg", tags: "image" },
-    { url: "./images/img12.jpg", tags: "image" },
-    { url: "./images/img13.jpg", tags: "image" },
-    { url: "./images/img14.jpg", tags: "image" },
-    { url: "./images/img15.jpg", tags: "image" },
-    { url: "./images/img16.jpg", tags: "image" },
-    { url: "./images/img17.jpg", tags: "image" },
-    { url: "./images/img18.jpg", tags: "image" }
+    { url: "./images/img1.jpg", tags: "mountaingreenry" },
+    { url: "./images/img2.jpg", tags: "mountainpotraitdark" },
+    { url: "./images/img3.jpg", tags: "waterseaoceanwavesorangesky" },
+    { url: "./images/img4.jpg", tags: "pathwaytree" },
+    { url: "./images/img5.jpg", tags: "lakewaterseabluemountain" },
+    { url: "./images/img6.jpg", tags: "orangeskywaterseaoceantree" },
+    { url: "./images/img7.jpg", tags: "roadwaydarkstraight" },
+    { url: "./images/img8.jpg", tags: "gardentree" },
+    { url: "./images/img9.jpg", tags: "treesunskyclouds" },
+    { url: "./images/img10.jpg", tags: "citylakeseacanallights" },
+    { url: "./images/img11.jpg", tags: "cloudsmountaindarkpotrait" },
+    { url: "./images/img12.jpg", tags: "housewaterseaoceanground" },
+    { url: "./images/img13.jpg", tags: "lakewateroceanseamountain" },
+    { url: "./images/img14.jpg", tags: "flowersgreenrytree" },
+    { url: "./images/img15.jpg", tags: "cave" },
+    { url: "./images/img16.jpg", tags: "waterseacity" },
+    { url: "./images/img17.jpg", tags: "orangeskywaterseaocean" },
+    { url: "./images/img18.jpg", tags: "seabeachoceanorangesky" }
 ];
 
-export default function Gallery() {
+export default function Gallery({searchQuery}) {
     const [images, setImages] = useState(gallery);
     const [columns, setColumns] = useState([[], [], []]);
     const [showImage, setShowImage] = useState(false);
@@ -55,6 +55,17 @@ export default function Gallery() {
         window.addEventListener("resize", updateColumns);
         return () => window.removeEventListener("resize", updateColumns);
     }, [images]);
+
+    useEffect(() => {
+        if (searchQuery === "") {
+            setImages(gallery);
+        } else {
+            const filteredImages = gallery.filter((image) => image.tags.toLowerCase().includes(searchQuery));
+            setImages(filteredImages);
+        }
+    }, [searchQuery]);
+
+    
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -88,6 +99,7 @@ export default function Gallery() {
 
     const handleDelete = (url) => {
         setImages(images.filter((img) => img.url !== url));
+        showAlert('deletion');
     };
 
     return (
@@ -98,6 +110,10 @@ export default function Gallery() {
 
             <div className="badAlert">
                 <span>An Error occured!</span>
+            </div>
+
+            <div className="deletion">
+                <span>Image has been Deleted!</span>
             </div>
 
             <input
